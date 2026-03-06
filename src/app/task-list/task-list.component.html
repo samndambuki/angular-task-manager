@@ -1,0 +1,32 @@
+<h1 class="text-xl text-center font-semibold mt-6 underline">Tasks List</h1>
+<div class="flex items-center justify-center mt-6">
+  <form class="flex flex-col w-100 shadow-lg rounded-lg p-12">
+    <div class="flex flex-col m-3">
+      <label class="font-semibold">Task Name</label>
+      <input
+        type="text"
+        class="border border-blue-300 rounded-lg mt-2 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-300 font-serif p-3"
+        placeholder="Enter task name"
+      />
+    </div>
+    <div class="flex flex-col m-3">
+      <label class="font-semibold">Description</label>
+      <input
+        type="text"
+        class="border border-blue-300 rounded-lg mt-2 font-serif p-3 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-300"
+        placeholder="Enter Task description"
+      />
+    </div>
+    <div class="flex flex-col m-3">
+      <label class="font-semibold">Status</label>
+      <select
+        class="border border-blue-300 rounded-lg cursor-pointer p-3 mt-2 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-300 font-serif"
+      >
+        <option selected>choose an option</option>
+        <option value="todo">todo</option>
+        <option value="pending">pending</option>
+        <option value="done">done</option>
+      </select>
+    </div>
+  </form>
+</div>
