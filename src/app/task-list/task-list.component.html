@@ -1,13 +1,32 @@
+<div
+  class="flex items-center justify-center p-6 shadow-md bg-4 rounded-lg sticky top-0 overflow-auto"
+>
+  <p class="font-bold font-serif">Task Manager</p>
+</div>
+
 <h1 class="text-xl text-center font-semibold mt-6 underline">Tasks List</h1>
 <div class="flex items-center justify-center mt-6">
-  <form class="flex flex-col w-100 shadow-lg rounded-lg p-12">
+  <form
+    [formGroup]="taskForm"
+    (ngSubmit)="createTask()"
+    class="flex flex-col w-100 shadow-lg rounded-lg p-12"
+  >
     <div class="flex flex-col m-3">
       <label class="font-semibold">Task Name</label>
       <input
         type="text"
         class="border border-blue-300 rounded-lg mt-2 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-300 font-serif p-3"
         placeholder="Enter task name"
+        formControlName="name"
       />
+      <div
+        *ngIf="taskForm.get('name')?.invalid && taskForm.get('name')?.touched"
+        class="text-red-600 text-sm mt-1"
+      >
+        <span *ngIf="taskForm.get('name')?.errors?.['required']"
+          >Task name is required</span
+        >
+      </div>
     </div>
     <div class="flex flex-col m-3">
       <label class="font-semibold">Description</label>
@@ -15,18 +34,55 @@
         type="text"
         class="border border-blue-300 rounded-lg mt-2 font-serif p-3 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-300"
         placeholder="Enter Task description"
+        formControlName="description"
       />
+      <div
+        *ngIf="
+          taskForm.get('description')?.invalid &&
+          taskForm.get('description')?.touched
+        "
+        class="text-red-600 text-sm mt-1"
+      >
+        <span *ngIf="taskForm.get('description')?.errors?.['required']"
+          >Task description is required</span
+        >
+      </div>
     </div>
     <div class="flex flex-col m-3">
       <label class="font-semibold">Status</label>
       <select
         class="border border-blue-300 rounded-lg cursor-pointer p-3 mt-2 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-300 font-serif"
+        formControlName="status"
       >
-        <option selected>choose an option</option>
-        <option value="todo">todo</option>
-        <option value="pending">pending</option>
-        <option value="done">done</option>
+        <option *ngFor="let status of statuses">{{ status.name }}</option>
       </select>
     </div>
+    <button
+      class="rounded-lg p-2 text-white border-blue-500 bg-blue-500 cursor-pointer"
+      type="submit"
+      [ngClass]="
+        taskForm.invalid
+          ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+          : 'rounded-lg p-2 text-white border-blue-500 bg-blue-500 cursor-pointer'
+      "
+      [disabled]="taskForm.invalid"
+    >
+      Create Task
+    </button>
   </form>
+</div>
+<div
+  class="shadow-lg rounded-lg flex text-center justify-center mt-6 grid grid-cols-6 p-4"
+>
+  <div *ngFor="let task of tasks" class="shadow-md m-4 rounded-lg p-4">
+    <p class="font-serif">
+      <span class="font-semibold">Name :</span> {{ task.name }}
+    </p>
+    <p class="font-serif">
+      <span class="font-semibold">Status : </span> {{ task.status }}
+    </p>
+    <p class="font-serif">
+      <span class="font-semibold">Description : </span> {{ task.description }}
+    </p>
+  </div>
 </div>
